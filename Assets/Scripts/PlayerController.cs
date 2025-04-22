@@ -13,13 +13,18 @@ public class PlayerController : MonoBehaviour
         gameOverImage = GameObject.Find("GameOverImage");
         gameOverImage.SetActive(false);
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.gravityScale = 0;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.W))
+        if (rb2d.gravityScale != 0)
         {
-            Jump();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.W))
+            {
+                Jump();
+            }
         }
+
     }
     void Jump()
     {
@@ -30,8 +35,11 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Pipe"))
         {
+            GameObject.Find("PipeSpawn").GetComponent<PipeSpawn>().canSpawn = false;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0); 
+            rb2d.gravityScale = 0;
             gameOverImage.SetActive(true);
             Invoke("GameOver", delayGameOverTime);
         }
