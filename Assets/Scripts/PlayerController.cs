@@ -6,14 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float jumpForce;
     private Rigidbody2D rb2d;
-    private GameObject gameOverImage;
     [SerializeField] private float delayGameOverTime;
+    public bool isGameOver = false;
+    [SerializeField] private GameObject tap;
     void Start()
     {
-        gameOverImage = GameObject.Find("GameOverImage");
-        gameOverImage.SetActive(false);
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.gravityScale = 0;
+        tap = GameObject.Find("TapPlayer");
     }
     void Update()
     {
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.W))
             {
                 Jump();
+                tap.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                tap.transform.position = new Vector3(tap.transform.position.x, tap.transform.position.y, 0);
             }
         }
 
@@ -40,12 +42,11 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("PipeSpawn").GetComponent<PipeSpawn>().canSpawn = false;
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0); 
             rb2d.gravityScale = 0;
-            gameOverImage.SetActive(true);
-            Invoke("GameOver", delayGameOverTime);
+            FindAnyObjectByType<UIManager>().GameOver();
         }
-    }
-    void GameOver()
+    }    
+    void OnTriggerEnter2D(Collider2D other)
     {
-        SceneManager.LoadScene("Menu");
+        FindAnyObjectByType<UIManager>().AddScore(1);
     }
 }
