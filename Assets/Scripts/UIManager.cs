@@ -12,28 +12,35 @@ public class UIManager : MonoBehaviour
     private GameObject numberImage;
     private RawImage numberImageComponent;
     [SerializeField] private Texture[] num;
-    public int score;
-    [SerializeField] private int maxScore;
+    public int coin;
+    [SerializeField] private int maxCoin;
     private TextMeshProUGUI scoreText;
     private GameObject gameOverImage;
     private GameObject restartButton;
+    private GameObject pauseButton;
+    private GameObject resumeButton;
     void Start()
     {
-        score = 0;
-        maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        coin = 0;
+        maxCoin = PlayerPrefs.GetInt("maxCoin", 0);
         getReadyImage = GameObject.Find("GetReadyImage");
         numberImage = GameObject.Find("NumberImage");
         numberImageComponent = numberImage.GetComponent<RawImage>();
-        scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+        scoreText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
         gameOverImage = GameObject.Find("GameOverImage");
         gameOverImage.SetActive(false);
         restartButton = GameObject.Find("RestartButton");
         restartButton.SetActive(false);
+        pauseButton = GameObject.Find("PauseButton");
+        pauseButton.SetActive(true);
+        resumeButton = GameObject.Find("ResumeButton");
+        resumeButton.SetActive(false);
         StartCoroutine(CountdownRoutine());
     }
     public void GameOver()
     {
-        PlayerPrefs.SetInt("MaxScore", score);
+        maxCoin += coin;
+        PlayerPrefs.SetInt("maxCoin", maxCoin);
         PostProcessVolume ppVolume = Camera.main.GetComponent<PostProcessVolume>();
         if (ppVolume != null)
         {
@@ -69,8 +76,25 @@ public class UIManager : MonoBehaviour
 
     public void AddScore(int scoreToAdd)
     {
-        score += scoreToAdd;
-        scoreText.text = "Score: " + score.ToString();
+        coin += scoreToAdd;
+        scoreText.text = coin.ToString();
     }
 
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseButton.SetActive(false);
+        resumeButton.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        pauseButton.SetActive(true);
+        resumeButton.SetActive(false);
+    }
 }
