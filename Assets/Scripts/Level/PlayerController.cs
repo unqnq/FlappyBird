@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.W))
             {
                 Jump();
+                AudioManager.Instance.PlayJump();
                 tap.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 tap.transform.position = new Vector3(tap.transform.position.x, tap.transform.position.y, 0);
             }
@@ -48,5 +49,6 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         FindAnyObjectByType<UIManager>().AddScore(1);
+        AudioManager.Instance.PlayScore();
     }
 }

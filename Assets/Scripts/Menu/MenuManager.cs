@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
         {
             GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetInt("maxCoin", 0).ToString();
         }
+        AudioManager.Instance.PlayMusic();
         
     }
     public void GoToLevel()
