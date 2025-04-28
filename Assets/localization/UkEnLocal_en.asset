@@ -26,6 +26,14 @@ MonoBehaviour:
       earn 1 point for each pair of pipes you pass.\r"
     m_Metadata:
       m_Items: []
+  - m_Id: 922809199194112
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 922851821711360
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

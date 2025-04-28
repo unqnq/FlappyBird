@@ -926,6 +926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfbe16f31b5eee44965bd87d231ce1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicGroup: {fileID: -1871468301796831213, guid: 0e1e82a40e75bd04db71beecd3673928, type: 2}
+  sfxGroup: {fileID: 6734710519303104295, guid: 0e1e82a40e75bd04db71beecd3673928, type: 2}
   jumpSound: {fileID: 8300000, guid: 9d45c05269dfaa742b3d69590ec9259d, type: 3}
   scoreSound: {fileID: 8300000, guid: 5cdd8ca34d309194e8ea1ffcfdf13efc, type: 3}
   crashSound: {fileID: 8300000, guid: f8ea5e6c4162def4e875b3ae416d6031, type: 3}

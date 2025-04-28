@@ -1,24 +1,27 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Sounds")]
+    [Header("Mixer Groups")]
+    public AudioMixerGroup musicGroup;
+    public AudioMixerGroup sfxGroup;
+
+    [Header("Sounds")]    
+    private AudioSource sfxSource;
     public AudioClip jumpSound;
     public AudioClip scoreSound;
     public AudioClip crashSound;
     public AudioClip clickSound;
 
     [Header("Music")]
-    public AudioClip backgroundMusic;
-
-    private AudioSource soundSource;
     private AudioSource musicSource;
+    public AudioClip backgroundMusic;
 
     private void Awake()
     {
-        // Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -31,19 +34,26 @@ public class AudioManager : MonoBehaviour
         }
 
         // Створюємо два AudioSource: для звуків і для музики
-        soundSource = gameObject.AddComponent<AudioSource>();
+        sfxSource = gameObject.AddComponent<AudioSource>();
         musicSource = gameObject.AddComponent<AudioSource>();
 
-        // Налаштовуємо музичний AudioSource
+        if (sfxGroup != null)
+        {
+            sfxSource.outputAudioMixerGroup = sfxGroup;
+        }
+        if (musicGroup != null)
+        {
+            musicSource.outputAudioMixerGroup = musicGroup;
+        }
         musicSource.loop = true;
-        musicSource.volume = 0.5f; // можна налаштувати гучність
+        musicSource.volume = 0.5f;
     }
 
     public void PlaySound(AudioClip clip)
     {
         if (clip != null)
         {
-            soundSource.PlayOneShot(clip);
+            sfxSource.PlayOneShot(clip);
         }
     }
 

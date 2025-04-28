@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: aboutText
     m_Metadata:
       m_Items: []
+  - m_Id: 922809199194112
+    m_Key: option.Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 922851821711360
+    m_Key: option.SFX
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
