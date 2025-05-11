@@ -35,4 +35,25 @@ public class AudioSettingsUI : MonoBehaviour
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20);
     }
+
+    public void AddMusic()
+    {
+        musicSlider.value = musicSlider.value + 0.1f > 1 ? 1 : musicSlider.value + 0.1f;
+        SetMusicVolume(musicSlider.value);
+    }
+    public void SubMusic()
+    {
+        musicSlider.value = musicSlider.value - 0.1f < 0 ? 0 : musicSlider.value - 0.1f;
+        SetMusicVolume(musicSlider.value);
+    }
+    public void AddSFX()
+    {
+        sfxSlider.value = sfxSlider.value + 0.1f > 1 ? 1 : sfxSlider.value + 0.1f;
+        SetSFXVolume(sfxSlider.value);
+    }
+    public void SubSFX()
+    {
+        sfxSlider.value = sfxSlider.value - 0.1f < 0 ? 0 : sfxSlider.value - 0.1f;
+        SetSFXVolume(sfxSlider.value);
+    }
 }

@@ -14,7 +14,7 @@ public class ButtonSoundManager : MonoBehaviour
         }
     }
 
-    private void PlayClickSound()
+    public void PlayClickSound()
     {
            AudioManager.Instance.PlayClick();
     }
