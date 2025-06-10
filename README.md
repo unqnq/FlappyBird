@@ -47,7 +47,6 @@ This is an enhanced **Flappy Bird** clone made with Unity, featuring core gamepl
 ---
 
 📸 Screenshots
-Replace these with your actual images or GIFs.
 
 <table align="center">
   <tr>
