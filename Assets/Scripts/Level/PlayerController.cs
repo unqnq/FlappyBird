@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject tap;
     void Start()
     {
+        Time.timeScale = 1;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.gravityScale = 0;
         tap = GameObject.Find("TapPlayer");
